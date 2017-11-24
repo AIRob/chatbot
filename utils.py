@@ -10,6 +10,7 @@ from vocab import Vocab
 def chat(input_text, tokenizer, model, vocab, max_output_len=25):
     input_text = vocab.label_encode(tokenizer(input_text))
     input_text = Variable(torch.LongTensor([input_text]), volatile=True).cuda()
+    input_text = model.embedding(input_text)
     output = [vocab.SOS_LABEL]
 
     _, thought = model.encoder(input_text)
@@ -17,6 +18,7 @@ def chat(input_text, tokenizer, model, vocab, max_output_len=25):
     prediction = vocab.SOS_LABEL
     while len(output) < max_output_len and prediction != vocab.EOS_LABEL:
         prediction = Variable(torch.LongTensor([[prediction]]), volatile=True).cuda()
+        prediction = model.embedding(prediction)
         prediction, thought = model.decoder(prediction, thought)
         prediction = prediction.data.topk(1)[1][0, 0, 0]
         output.append(prediction)

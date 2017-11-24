@@ -51,8 +51,14 @@ def get_loss(model, batch, inference_only=False):
     questions = Variable(torch.LongTensor(questions), volatile=inference_only).cuda()
     answers = Variable(torch.LongTensor(answers), volatile=inference_only).cuda()
 
-    _, thought = model.encoder(questions)
-    decoder_output, _ = model.decoder(answers, thought)
+    # print questions.size(), answers.size()
+
+    q_embedded = model.embedding(questions)
+    a_embedded = model.embedding(answers)
+
+    # print questions.size(), answers.size()
+    _, thought = model.encoder(q_embedded)
+    decoder_output, _ = model.decoder(a_embedded, thought)
 
     loss = 0
     loss_fn = torch.nn.NLLLoss()
