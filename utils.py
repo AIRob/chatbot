@@ -4,7 +4,6 @@ from itertools import chain
 import torch
 from torch.autograd import Variable
 
-from models import init_hidden
 from vocab import Vocab
 
 
@@ -13,13 +12,12 @@ def chat(input_text, tokenizer, model, vocab, max_output_len=25):
     input_text = Variable(torch.LongTensor([input_text]), volatile=True).cuda()
     output = [vocab.SOS_LABEL]
 
-    _, encoder_hidden = model.encoder(input_text)
-    hidden = init_hidden(model.num_layers, model.num_layers, model.hidden_size)
+    _, thought = model.encoder(input_text)
 
     prediction = vocab.SOS_LABEL
     while len(output) < max_output_len and prediction != vocab.EOS_LABEL:
         prediction = Variable(torch.LongTensor([[prediction]]), volatile=True).cuda()
-        prediction, _ = model.decoder(prediction, encoder_hidden, hidden)
+        prediction, thought = model.decoder(prediction, thought)
         prediction = prediction.data.topk(1)[1][0, 0, 0]
         output.append(prediction)
 

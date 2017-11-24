@@ -4,7 +4,6 @@ import time
 import torch
 from torch.autograd import Variable
 
-from models import init_hidden
 from utils import pad_seqs
 
 
@@ -52,14 +51,12 @@ def get_loss(model, batch, inference_only=False):
     questions = Variable(torch.LongTensor(questions), volatile=inference_only).cuda()
     answers = Variable(torch.LongTensor(answers), volatile=inference_only).cuda()
 
-    batch_size = len(batch)
-    hidden = init_hidden(model.num_layers, batch_size, model.hidden_size)
-
-    _, encoder_hidden = model.encoder(questions)
-    decoder_output, _ = model.decoder(answers, encoder_hidden, hidden)
+    _, thought = model.encoder(questions)
+    decoder_output, _ = model.decoder(answers, thought)
 
     loss = 0
     loss_fn = torch.nn.NLLLoss()
+    batch_size = len(batch)
     for i in xrange(batch_size):
         loss += loss_fn(decoder_output[i, :answer_lens[i] - 1], answers[i, 1:answer_lens[i]])
 
