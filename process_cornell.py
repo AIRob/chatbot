@@ -14,7 +14,7 @@ TEST_PATH = os.path.join(PROCESSED_PATH, 'cornell_test.txt')
 
 ENCODING = 'ISO-8859-2'
 
-MAX_SEQ_LEN = 20
+MAX_SEQ_LEN = 5
 MIN_SEQ_LEN = 1
 
 

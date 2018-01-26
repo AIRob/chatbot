@@ -1,0 +1,35 @@
+Human: can you say no
+Chatbot: <sos> no thanks . <eos>
+Human: what is your name
+Chatbot: <sos> follow me . <eos>
+Human: where are we going?
+Chatbot: <sos> to take a picture . <eos>
+Human: A picture of what?
+Chatbot: <sos> please , sir . <eos>
+Human: how tall are you
+Chatbot: <sos> ... ' ? <eos>
+Human: 2 plus 2 is
+Chatbot: <sos> ? <eos>
+Human: Will google hire me?
+Chatbot: <sos> for a second ? <eos>
+Human: Tell me the alphabet
+Chatbot: <sos> tell much . <eos>
+Human: What is your gender?
+Chatbot: <sos> a funeral . <eos>
+Human: What is love?
+Chatbot: <sos> for . <eos>
+Human: Tell me a joke.
+Chatbot: <sos> tell me . <eos>
+Human: What day is it?
+Chatbot: <sos> it . <eos>
+Human: Who are you?
+Chatbot: <sos> i 'm the creator . <eos>
+Human: How do you feel?
+Chatbot: <sos> i 'm fine . <eos>
+Human: Are you tired?
+Chatbot: <sos> what ? <eos>
+Human: Are you hungry?
+Chatbot: <sos> what ? <eos>
+Human: Are you strong?
+Chatbot: <sos> yes . <eos>
+Human: EXIT
